@@ -78,6 +78,7 @@ function Write() {
       navigate("/");
     }
   }
+  
 
   function removeHtmlTags(text) {
     return text.replace(/<[^>]+>/g, '');
@@ -108,6 +109,15 @@ function Write() {
                 
               />
             </div>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="isSpecial"
+              checked={value.isSpecial}
+              onChange={(e) => setValue({ ...value, isSpecial: e.target.checked })}
+            />
+            <label htmlFor="isSpecial">Make this blog special</label>
           </div>
           <button className="button" onClick={handleBlog}>
             publish
