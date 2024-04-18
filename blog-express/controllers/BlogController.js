@@ -47,6 +47,30 @@ export const getData = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+// write.js
+
+export const markBlogAsSpecial = async (req, res) => {
+  try {
+    const { blogId } = req.body;
+
+    const blog = await BlogModel.findById(blogId);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    const updatedBlog = await BlogModel.findByIdAndUpdate(
+      blogId,
+      { isSpecial: true },
+      { new: true }
+    );
+
+    return res.json(updatedBlog);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
 
 export const getBlogData = async (req, res) => {
   try {
